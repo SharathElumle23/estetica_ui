@@ -8,6 +8,7 @@ import {
   Card,
   CardMedia,
   CardContent,
+  InputAdornment,
 } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts } from '../../store/products/productSlice';
@@ -20,6 +21,7 @@ import {
   clearCart,
 } from '../../store/cart/cartSlice';
 import { sendCartItems } from '../../store/cart/cartaction';
+import searchIcon from '../../assets/searchIcon.svg';
 const categories = [
   'Massage Therapy',
   'Hair Cut, Wash and Style',
@@ -36,16 +38,14 @@ const ProductPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('Massage Therapy');
   const [showCart, setShowCart] = useState(false);
   const handleAddToCart = async (product) => {
-    console.log(39, product);
     setShowCart(true);
 
     const previousCart = [...cartItems];
     dispatch(addToCart(product));
-
     try {
       // Transform cart for backend: only send _id and qty
       const updatedCart = [...cartItems, product].map((item) => ({
-        _id: item.id || item._id, // handle both id and _id cases
+        _id: item.id || item._id,
         qty: item.quantity || 1,
       }));
 
@@ -76,12 +76,31 @@ const ProductPage = () => {
         placeholder="Search for Product !"
         variant="outlined"
         size="small"
-        sx={{ width: '360px', mb: 2 }}
+        sx={{
+          width: '360px',
+          mb: 2,
+          '& .MuiOutlinedInput-root': {
+            borderRadius: '12px',
+          },
+        }}
         value={search}
         onChange={(e) => {
           setSearch(e.target.value);
           setSelectedCategory('');
           dispatch(fetchProducts(e.target.value));
+        }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <img
+                src={searchIcon}
+                alt="menu"
+                width={24}
+                height={24}
+                bgcolor={'red'}
+              />
+            </InputAdornment>
+          ),
         }}
       />
       {/* Category filters */}
@@ -136,7 +155,7 @@ const ProductPage = () => {
                     <CardMedia
                       component="img"
                       height="120"
-                      image={product.image}
+                      image={`http://localhost:5000/uploads/${product.image}`}
                       alt={product.name}
                       sx={{ objectFit: 'contain' }}
                     />

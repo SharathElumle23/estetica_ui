@@ -138,27 +138,30 @@ const CheckOut = () => {
                       justifyContent={'end'}
                     >
                       <IconButton size="small">
-                        <img src={edit} alt="menu" width={24} height={24} />
+                        <img src={edit} alt="menu" width={16} height={16} />
                       </IconButton>
                       <IconButton size="small">
                         <img
                           src={deleteIcon}
                           alt="menu"
-                          width={24}
-                          height={24}
+                          width={16}
+                          height={16}
                         />
                       </IconButton>
                     </Grid>
                     <Grid>
                       <IconButton size="small">
-                        <img
-                          src={discountIcon}
-                          alt="menu"
-                          width={24}
-                          height={24}
-                          sx={{ m: 1 }}
-                        />{' '}
-                        Special Discount
+                        <Box display="flex" alignItems="center" gap={1}>
+                          <img
+                            src={discountIcon}
+                            alt="menu"
+                            width={16}
+                            height={16}
+                          />
+                          <Typography variant="caption">
+                            Special Discount
+                          </Typography>
+                        </Box>
                       </IconButton>
                     </Grid>
                   </Grid>

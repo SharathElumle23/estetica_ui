@@ -6,6 +6,7 @@ import {
   Button,
   Divider,
   Grid,
+  CardMedia,
 } from '@mui/material';
 import DeleteIconRed from '../../assets/deleteIconRed.svg';
 import { clearCart } from '../../store/cart/cartSlice';
@@ -18,7 +19,7 @@ const Cart = ({ cartItems, updateQuantity, removeItem, onCheckout }) => {
   const getTotal = () =>
     cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  //
+  console.log(22, cartItems);
   return (
     <Box sx={{ width: 350, p: 2, bgcolor: '#f9f9f9', borderRadius: 2 }}>
       <Grid display="flex" justifyContent="space-between">
@@ -44,6 +45,18 @@ const Cart = ({ cartItems, updateQuantity, removeItem, onCheckout }) => {
               alignItems: 'center',
             }}
           >
+            <CardMedia
+              component="img"
+              image={`http://localhost:5000/uploads/${item.image}`}
+              alt={item.name}
+              sx={{
+                width: 80,
+                height: 80,
+                objectFit: 'contain',
+                borderRadius: 1,
+              }}
+            />
+
             <Box>
               <Typography variant="subtitle1">{item.name}</Typography>
               <Typography variant="body2" color="text.secondary">
