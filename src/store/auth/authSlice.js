@@ -66,7 +66,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload.user;
         state.token = action.payload.token;
-        sessionStorage.setItem('user', action.payload.user);
+        sessionStorage.setItem('user', JSON.stringify(action.payload.user));
         sessionStorage.setItem('token', action.payload.token);
       })
       .addCase(signupUser.rejected, (state, action) => {
